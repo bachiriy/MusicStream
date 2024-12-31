@@ -195,5 +195,5 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 
 
-For inquiries, please contact [[medbachiry@example.com](mailto\:medbachiry@example.com)].
+For inquiries, please contact [[Me](mailto\:medbachiry@example.com)].
 
