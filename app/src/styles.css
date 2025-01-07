@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+body {
+  @apply bg-background text-text;
+}
+
+.btn-primary {
+  @apply bg-primary text-white px-4 py-2 rounded-full hover:opacity-90 transition-opacity;
+}
+
+.btn-secondary {
+  @apply bg-surface text-white px-4 py-2 rounded-full hover:opacity-90 transition-opacity;
+} 

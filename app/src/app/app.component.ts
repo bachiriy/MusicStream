@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  template: `
+    <div class="min-h-screen flex flex-col">
+      <app-header></app-header>
+      <main class="flex-1">
+        <router-outlet></router-outlet>
+      </main>
+      <app-player></app-player>
+    </div>
+  `
 })
-export class AppComponent {
-  title = 'MusicStream';
-}
+export class AppComponent {} 
