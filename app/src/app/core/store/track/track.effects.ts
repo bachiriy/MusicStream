@@ -105,7 +105,7 @@ export class TrackEffects {
       map(([{ id }, tracks]) => {
         const track = tracks.find(t => t.id === id);
         if (track) {
-          return TrackActions.playTrack({ track });
+          return TrackActions.setTrack({ track });
         }
         return TrackActions.loadTracksFailure({ error: 'Track not found' });
       })

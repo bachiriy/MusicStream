@@ -13,7 +13,7 @@ import { LibraryComponent } from './pages/library/library.component';
     CommonModule,
     FormsModule,
     SharedModule,
-    LibraryRoutingModule
+    LibraryRoutingModule,
   ]
 })
 export class LibraryModule { } 

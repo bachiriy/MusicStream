@@ -49,3 +49,8 @@ export const selectError = createSelector(
   selectTrackState,
   state => state.error
 ); 
+
+export const selectCurrentTime = createSelector(
+  selectTrackState,
+  state => state.currentTime
+)

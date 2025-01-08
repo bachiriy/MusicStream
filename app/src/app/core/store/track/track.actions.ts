@@ -49,4 +49,9 @@ export const setVolume = createAction(
 export const loadTrack = createAction(
   '[Track] Load Track',
   props<{ id: number }>()
-); 
+);
+
+export const setTrack = createAction(
+  '[Track] Set Track',
+  props<{ track: Track}>()
+)

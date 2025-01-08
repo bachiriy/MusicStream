@@ -67,5 +67,9 @@ export const trackReducer = createReducer(
   on(TrackActions.setVolume, (state, { volume }) => ({
     ...state,
     volume: volume
+  })),
+  on(TrackActions.setTrack, (state, { track }) => ({
+    ...state,
+    currentTrack: track
   }))
 ); 
