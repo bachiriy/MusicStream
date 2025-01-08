@@ -55,3 +55,8 @@ export const setTrack = createAction(
   '[Track] Set Track',
   props<{ track: Track}>()
 )
+
+export const deleteTrack = createAction(
+  '[Track] Delete Track',
+  props<{ trackId: number}>()
+)

@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
               routerLink="/library" 
               routerLinkActive="text-primary"
               class="text-gray-300 hover:text-white transition-colors">
-              Bibliothèque
+              Library
             </a>
           </nav>
         </div>

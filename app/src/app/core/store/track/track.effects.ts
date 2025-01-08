@@ -134,6 +134,17 @@ export class TrackEffects {
     )
   );
 
+  deleteTrack$ = createEffect(() => 
+    this.actions$.pipe(
+      ofType(TrackActions.deleteTrack),
+      withLatestFrom(this.store.select(fromTrack.selectAllTracks)),
+      map(([{trackId}, tracks]) => {
+        this.trackService.deleteTrack(trackId);
+        return TrackActions.loadTracksSuccess({ tracks: tracks.filter(t => t.id !== trackId) });
+      })
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private store: Store,

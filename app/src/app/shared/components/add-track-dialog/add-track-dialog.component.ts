@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TrackService } from '../../../core/services/track.service';
 import { Store } from '@ngrx/store';
 import * as TrackActions from '../../../core/store/track/track.actions';
 

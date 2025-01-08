@@ -17,6 +17,8 @@
       <option value="pop">Pop</option>
       <option value="rock">Rock</option>
       <option value="rap">Rap</option>
+      <option value="rap">Rai</option>
+      <option value="rap">Cha3bi</option>
       <option value="other">Other</option>
     </select>
   </div>
@@ -26,9 +28,7 @@
     <!-- Empty State -->
     <div *ngIf="(filteredTracks$ | async)?.length === 0" class="text-center py-10">
       <p class="text-gray-400 mb-4">No tracks found</p>
-      <button class="btn-primary" (click)="openAddTrackDialog()">
-        Add Track
-      </button>
+      <app-add-track-button content="Add Track"></app-add-track-button>
     </div>
 
     <!-- Track Items -->

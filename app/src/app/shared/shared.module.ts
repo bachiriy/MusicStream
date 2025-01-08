@@ -7,6 +7,7 @@ import { PlayerComponent } from './components/player/player.component';
 import { AddTrackButtonComponent } from './components/add-track-button/add-track-button.component';
 import { AddTrackDialogComponent } from './components/add-track-dialog/add-track-dialog.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { ConfirmationAlertComponent } from './components/confirmation-alert/confirmation-alert.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     PlayerComponent,
     AddTrackButtonComponent,
     AddTrackDialogComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ConfirmationAlertComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     HeaderComponent,
     PlayerComponent,
     AddTrackButtonComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ConfirmationAlertComponent
   ]
 })
 export class SharedModule { } 

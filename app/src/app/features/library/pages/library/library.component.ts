@@ -7,6 +7,7 @@ import { Track } from '../../../../core/models/track.model';
 import * as TrackActions from '../../../../core/store/track/track.actions';
 import * as fromTrack from '../../../../core/store/track/track.selectors';
 import { PlaybackState } from '../../../../core/models/track.model';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 
 @Component({
   selector: 'app-library',
@@ -24,7 +25,8 @@ export class LibraryComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private router: Router
+    private router: Router,
+    private dialog: DialogService
   ) {
     this.tracks$ = this.store.select(fromTrack.selectAllTracks);
     this.loading$ = this.store.select(fromTrack.selectLoading);
@@ -70,9 +72,5 @@ export class LibraryComponent implements OnInit {
 
   viewTrackDetails(track: Track) {
     this.router.navigate(['/track', track.id]);
-  }
-
-  openAddTrackDialog() {
-    // This is handled by the AddTrackButton component
   }
 } 

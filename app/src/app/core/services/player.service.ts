@@ -38,7 +38,7 @@ export class PlayerService {
 
   async playTrack(track: Track) {
     try {
-      const audioFile = await db.audioFiles.where('trackId').equals(track.id!).first();
+      const audioFile = await db.audioFiles.where('trackId').equals(track.id).first();
       if (!audioFile) throw new Error('Audio file not found');
 
       const audioUrl = URL.createObjectURL(audioFile.blob);
