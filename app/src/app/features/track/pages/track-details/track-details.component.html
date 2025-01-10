@@ -13,17 +13,17 @@
 
     <!-- Track Info -->
     <div class="bg-surface rounded-lg p-6">
-      <div class="flex flex-col md:flex-row gap-8">
+      <div class="relative flex flex-col md:flex-row gap-8">
         <!-- Cover Image -->
-        <div class="w-full relative md:w-64 h-64 bg-gray-700 rounded-lg flex-shrink-0">
+        <div class="w-full md:w-64 h-64 bg-gray-700 rounded-lg flex-shrink-0">
           <img 
-            [src]="track.coverImage || 'assets/images/placeholder.png'" 
+            [src]="track.coverImage || './../../../../../assets/images/track_placeholder.jpg'" 
             [alt]="track.title"
-            class="absolute w-full h-full object-cover rounded-lg"
+            class="w-full h-full object-cover rounded-lg"
           >
 
           <button 
-            class="absolute shadow-2xl bottom-0 bg-gray-300 border border-red-500 hover:bg-red-500 hover:text-white trans text-red-500 p-2 m-2 hover:shadow-2xl rounded-full hover:opacity-90 transition ease-in-out delay-130 hover:-translate-y-1 hover:scale-100"
+            class="absolute shadow-2xl bottom-0 bg-zinc-900 right-0 border border-red-500 hover:bg-red-700 hover:text-white trans text-red-500 p-2 m-2 hover:shadow-2xl rounded-full hover:opacity-90 transition ease-in-out delay-130 hover:-translate-y-1 hover:scale-100"
             (click)="deleteTrack()"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -32,7 +32,7 @@
           </button>
 
           <button
-            class="absolute bottom-0 left-14 bg-gray-300 border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white p-2 m-2 rounded-full hover:opacity-90 transition ease-in-out delay-130 hover:-translate-y-1 hover:scale-100"
+            class="absolute bottom-0 right-14 bg-zinc-900 border border-blue-500 text-blue-500 hover:bg-blue-700 hover:text-white p-2 m-2 rounded-full hover:opacity-90 transition ease-in-out delay-130 hover:-translate-y-1 hover:scale-100"
             (click)="editTrack(track.id)"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -77,6 +77,13 @@
     </div>
   </div>
   
-  <app-confirmation-alert *ngIf="deleting" (confirmed)="confirmDeletion($event, track.id)" (touched)="closeAlert($event)"></app-confirmation-alert>
+  <app-confirmation-alert
+    *ngIf="deleting"
+    (confirmed)="confirmDeletion($event, track.id)" 
+    (touched)="closeAlert($event)"
+    title="Deleting Track"
+    message="Are you sure you want to delete this Track with the #id:{{track.id}} ?"
+    color="red"
+   >
+  </app-confirmation-alert>
 </div>
-

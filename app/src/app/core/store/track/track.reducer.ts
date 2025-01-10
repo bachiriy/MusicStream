@@ -57,7 +57,7 @@ export const trackReducer = createReducer(
   on(TrackActions.stopTrack, state => ({
     ...state,
     isPlaying: false,
-    currentTime: 0
+    // currentTime: 0
   })),
   on(TrackActions.updateProgress, (state, { currentTime, duration }) => ({
     ...state,
@@ -71,5 +71,10 @@ export const trackReducer = createReducer(
   on(TrackActions.setTrack, (state, { track }) => ({
     ...state,
     currentTrack: track
-  }))
+  })),
+  
+  on(TrackActions.resumeTrack, state => ({
+    ...state,
+    isPlaying: true
+  })),
 ); 

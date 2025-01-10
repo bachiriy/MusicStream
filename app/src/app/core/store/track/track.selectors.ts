@@ -36,7 +36,7 @@ export const selectPlaybackState = createSelector(
     isPlaying: state.isPlaying,
     currentTime: state.currentTime,
     duration: state.duration,
-    volume: state.volume
+    volume: state.volume,
   })
 );
 

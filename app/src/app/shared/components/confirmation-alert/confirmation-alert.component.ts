@@ -2,11 +2,13 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-confirmation-alert',
+  standalone: false,
   templateUrl: './confirmation-alert.component.html'
 })
 export class ConfirmationAlertComponent {
     @Input() title: string = 'Delete Item'; 
     @Input() message: string = 'Are you sure you want to delete this item?';
+    @Input() color: 'red' | 'green' = 'green';
 
     @Output() touched = new EventEmitter<boolean>();
     @Output() confirmed = new EventEmitter<boolean>();

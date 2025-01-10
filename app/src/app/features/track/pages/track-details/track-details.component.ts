@@ -8,11 +8,13 @@ import * as fromTrack from '../../../../core/store/track/track.selectors';
 
 @Component({
   selector: 'app-track-details',
-  templateUrl: './track-details.component.html' 
+  standalone: false,
+  templateUrl: './track-details.component.html',
 })
 export class TrackDetailsComponent implements OnInit {
   track$: Observable<Track | null>;
   deleting: boolean = false;
+  editMode: boolean = false;
 
   constructor(
     private store: Store,
@@ -54,6 +56,6 @@ export class TrackDetailsComponent implements OnInit {
   }
   
   editTrack(trackId: number) {
-
+      console.log(trackId);
   }
 } 
