@@ -197,3 +197,9 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 For inquiries, please contact [[Me](mailto\:medbachiry@example.com)].
 
+### Figma
+[Figma Link](https://www.figma.com/design/FF15DHpq7n2le4FXC9MaJd/MusicStream?node-id=0-1&t=qwOW82Py0sqxNkhW-1)
+
+
+### Jira 
+[Jira Link](https://www.figma.com/design/FF15DHpq7n2le4FXC9MaJd/MusicStream?node-id=0-1&t=qwOW82Py0sqxNkhW-1)
