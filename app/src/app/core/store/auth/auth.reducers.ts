@@ -3,9 +3,9 @@ import * as AuthActions from './auth.actions';
 import { User } from '../../models/user.module';
 
 export interface AuthState {
-  currentUser: User | null;
+  currentUser: User | null | Partial<User>;
   isAuthenticated: boolean;
-  error: any;
+  error: any | null;
 }
 
 export const initialState: AuthState = {
@@ -16,55 +16,13 @@ export const initialState: AuthState = {
 
 export const authReducer = createReducer(
   initialState,
-  on(AuthActions.loadAuths, state => ({
+  on(AuthActions.register, (state, { user } )=> ({
     ...state,
-    loading: true
+    currentUser: user 
   })),
-  on(AuthActions.loadAuthsSuccess, (state, { auths }) => ({
+  on(AuthActions.login, (state, { user }) => ({
     ...state,
-    auths,
-    loading: false,
+    currentUser: user, 
     error: null
-  })),
-  on(AuthActions.loadAuthsFailure, (state, { error }) => ({
-    ...state,
-    loading: false,
-    error: error
-  })),
-  on(AuthActions.addAuthSuccess, (state, { auth }) => ({
-    ...state,
-    auths: [...state.auths, auth]
-  })),
-  on(AuthActions.playAuth, (state, { auth }) => ({
-    ...state,
-    currentAuth: auth,
-    isPlaying: true
-  })),
-  on(AuthActions.pauseAuth, state => ({
-    ...state,
-    isPlaying: false
-  })),
-  on(AuthActions.stopAuth, state => ({
-    ...state,
-    isPlaying: false,
-    // currentTime: 0
-  })),
-  on(AuthActions.updateProgress, (state, { currentTime, duration }) => ({
-    ...state,
-    currentTime,
-    duration
-  })),
-  on(AuthActions.setVolume, (state, { volume }) => ({
-    ...state,
-    volume: volume
-  })),
-  on(AuthActions.setAuth, (state, { auth }) => ({
-    ...state,
-    currentAuth: auth
-  })),
-  
-  on(AuthActions.resumeAuth, state => ({
-    ...state,
-    isPlaying: true
   })),
 ); 

@@ -1,52 +1,74 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { User } from 'src/app/core/models/user.module';
-import * as AuthActions from 'src/app/core/store/auth/auth.actions';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
+  standalone: false,
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
-
-  userForm: FormGroup;
+export class RegisterComponent implements OnInit {
+  registerForm: FormGroup;
+  isLoading = false;
   error: string | null = null;
 
   constructor(
     private fb: FormBuilder,
-    private store: Store
+    private router: Router,
+    private authService: AuthService
   ) {
-    this.userForm = this.fb.group({
-      username: ['', [Validators.required, Validators.maxLength(50)]],
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+    this.registerForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required]]
+    }, {
+      validators: this.passwordMatchValidator
     });
   }
 
-
-  async onSubmit() {
-    if (this.userForm.valid) {
-      try {
-        // const userData: Partial<User> = {
-        //   ...this.userForm.value,
-        // };
-
-        this.store.dispatch(AuthActions.register({ 
-          user: this.userForm.value, 
-        }));
-        
-      } catch (error) {
-        console.error('Error registering user:', error);
-        this.error = error instanceof Error ? error.message : 'An unknown error occurred';
-      }
-    } else {
-      this.error = 'Please fill in all required fields';
-      console.error('Form validation failed:', {
-        formErrors: this.userForm.errors,
-        formValue: this.userForm.value,
-      });
+  ngOnInit(): void {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/dashboard']);
     }
+  }
+
+  private passwordMatchValidator(form: FormGroup) {
+    const password = form.get('password');
+    const confirmPassword = form.get('confirmPassword');
+
+    if (password?.value !== confirmPassword?.value) {
+      confirmPassword?.setErrors({ passwordMismatch: true });
+      return { passwordMismatch: true };
+    }
+    
+    return null;
+  }
+
+  onSubmit(): void {
+    if (this.registerForm.invalid) {
+      return;
+    }
+
+    this.isLoading = true;
+    this.error = null;
+
+    const { email, password } = this.registerForm.value;
+
+    this.authService.register(email, password).subscribe({
+      next: () => {
+        this.router.navigate(['/login'], { 
+          queryParams: { registered: 'true' }
+        });
+      },
+      error: (err) => {
+        this.error = err.error?.message || 'Registration failed. Please try again.';
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
+    });
   }
 }

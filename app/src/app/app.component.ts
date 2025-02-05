@@ -18,7 +18,7 @@ import { Observable, filter, map, of } from 'rxjs';
 })
 export class AppComponent {
 
-  authenticated$: Observable<boolean> = of(false);
+  authenticated$: Observable<boolean> = of(false); // TODO: make authentication state of user
 
   constructor(private router: Router, private title: Title){
     router.events.pipe(
