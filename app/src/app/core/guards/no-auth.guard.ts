@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
-import { 
-    CanActivate, 
-    Router, 
-    ActivatedRouteSnapshot, 
-    RouterStateSnapshot 
-} from '@angular/router';
-import { Observable, map, take } from 'rxjs';
+import { CanActivate, Router } from '@angular/router';
+import { Observable, map } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
@@ -17,18 +12,16 @@ export class NoAuthGuard implements CanActivate {
         private router: Router
     ) {}
 
-    canActivate(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot
-    ): Observable<boolean> {
+    canActivate(): Observable<boolean> {
         return this.authService.currentUser$.pipe(
-            take(1),
             map(user => {
                 if (user) {
-                    // If user is logged in, redirect to library
+                    
                     this.router.navigate(['/library']);
                     return false;
                 }
+                console.log('user: ', user);
+                
                 return true;
             })
         );

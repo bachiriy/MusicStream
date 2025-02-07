@@ -2,27 +2,27 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { NoAuthGuard } from '../../core/guards/no-auth.guard';
+import { AuthResolver } from '../../core/resolvers/auth.resolver';
 
 const routes: Routes = [
   {
+    path: 'login',
+    component: LoginComponent,
+    resolve: {
+      auth: AuthResolver
+    }
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    resolve: {
+      auth: AuthResolver
+    }
+  },
+  {
     path: '',
-    canActivate: [NoAuthGuard],
-    children: [
-      {
-        path: 'login',
-        component: LoginComponent
-      },
-      {
-        path: 'register',
-        component: RegisterComponent
-      },
-      {
-        path: '',
-        redirectTo: 'login',
-        pathMatch: 'full'
-      }
-    ]
+    redirectTo: 'login',
+    pathMatch: 'full'
   }
 ];
 

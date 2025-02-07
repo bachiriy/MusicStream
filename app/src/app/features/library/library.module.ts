@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { LibraryRoutingModule } from './library-routing.module';
 import { LibraryComponent } from './pages/library/library.component';
+import { AlbumService } from '../../core/services/album.service';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { LibraryComponent } from './pages/library/library.component';
     FormsModule,
     SharedModule,
     LibraryRoutingModule,
-  ]
+  ],
+  providers: [AlbumService]
 })
 export class LibraryModule { } 

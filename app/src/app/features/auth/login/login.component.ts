@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { take } from 'rxjs/operators';
 
 @Component({
     selector: 'app-login',
@@ -61,13 +62,11 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     error: string = '';
     loading = false;
-    returnUrl: string = '/';
 
     constructor(
         private fb: FormBuilder,
         private authService: AuthService,
-        private router: Router,
-        private route: ActivatedRoute
+        private router: Router
     ) {
         this.loginForm = this.fb.group({
             username: ['', [Validators.required]],
@@ -75,15 +74,7 @@ export class LoginComponent implements OnInit {
         });
     }
 
-    ngOnInit() {
-        // Get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-        
-        // If already logged in, redirect
-        if (this.authService.isAuthenticated()) {
-            this.router.navigate([this.returnUrl]);
-        }
-    }
+    ngOnInit() {}
 
     onSubmit(): void {
         if (this.loginForm.invalid) {
@@ -96,10 +87,18 @@ export class LoginComponent implements OnInit {
         this.authService.login(this.loginForm.value)
             .subscribe({
                 next: () => {
-                    this.router.navigate([this.returnUrl]);
+                    this.loading = false;
                 },
                 error: (error) => {
-                    this.error = error.error?.message || 'Login failed';
+                    if (error.error?.message) {
+                        this.error = error.error.message;
+                    } else if (error.error?.errors) {
+                        this.error = Object.values(error.error.errors).join(', ');
+                    } else if (typeof error.error === 'string') {
+                        this.error = error.error;
+                    } else {
+                        this.error = 'Login failed. Please try again.';
+                    }
                     this.loading = false;
                 }
             });

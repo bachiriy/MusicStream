@@ -14,16 +14,16 @@ import { AuthService } from '../../../core/services/auth.service';
             <form class="mt-8 space-y-6" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                 <div class="rounded-md shadow-sm -space-y-px">
                     <div>
-                        <label for="username" class="sr-only">Username</label>
-                        <input id="username" name="username" type="text" formControlName="username" required
+                        <label for="name" class="sr-only">Full Name</label>
+                        <input id="name" name="name" type="text" formControlName="name" required
                             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                            placeholder="Username">
+                            placeholder="Full Name">
                     </div>
                     <div>
-                        <label for="email" class="sr-only">Email</label>
-                        <input id="email" name="email" type="email" formControlName="email" required
+                        <label for="username" class="sr-only">Username</label>
+                        <input id="username" name="username" type="text" formControlName="username" required
                             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                            placeholder="Email">
+                            placeholder="Username">
                     </div>
                     <div>
                         <label for="password" class="sr-only">Password</label>
@@ -65,9 +65,9 @@ export class RegisterComponent {
         private router: Router
     ) {
         this.registerForm = this.fb.group({
-            username: ['', [Validators.required]],
-            password: ['', [Validators.required, Validators.minLength(6)]],
-            email: ['', [Validators.required, Validators.email]]
+            name: ['', Validators.required],
+            username: ['', Validators.required],
+            password: ['', [Validators.required, Validators.minLength(6)]]
         });
     }
 
@@ -85,7 +85,19 @@ export class RegisterComponent {
                     this.router.navigate(['/']);
                 },
                 error: (error) => {
-                    this.error = error.error?.message || 'Registration failed';
+                    console.log('err msg: ', error);
+                    
+                    // Handle different types of error responses
+                    if (error.error?.message) {
+                        this.error = error.error.message;
+                    } else if (error.error?.errors) {
+                        // Handle validation errors
+                        this.error = Object.values(error.error.errors).join(', ');
+                    } else if (typeof error.error === 'string') {
+                        this.error = error.error;
+                    } else {
+                        this.error = 'Registration failed. Please try again.';
+                    }
                     this.loading = false;
                 }
             });
