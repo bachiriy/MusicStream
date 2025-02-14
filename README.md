@@ -5,7 +5,9 @@
 MusicStream is a modern web application for streaming and organizing music, built with Angular 17. The application provides an intuitive user experience with advanced features like state management using NgRx, audio playback controls, and responsive design. It also supports local data persistence via IndexedDB, ensuring offline functionality.
 
 ---
+![Screenshot from 2025-02-14 09-52-08](https://github.com/user-attachments/assets/906de5ae-ed96-4a21-8c12-0cb1b6a054e6)
 
+---
 ## Features
 
 ### Core Features
